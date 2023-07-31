@@ -5,22 +5,23 @@ import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { Heading } from './App.styled';
 
-export const App = () => {
-  const contactList = [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ];
+const contactList = [
+  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+];
 
-  const [contacts, setContacts] = useState(contactList);
+export const App = () => {
+  const [contacts, setContacts] =
+    useState(() => JSON.parse(localStorage.getItem('contacts'))) ?? contactList;
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const strContacts = localStorage.getItem('contacts');
-    const contactsLocalStorage = JSON.parse(strContacts) || [];
-    setContacts(contactsLocalStorage);
-  }, []);
+  // useEffect(() => {
+  //   const strContacts = localStorage.getItem('contacts');
+  //   const contactsLocalStorage = JSON.parse(strContacts) || [];
+  //   setContacts(contactsLocalStorage);
+  // }, []);
 
   useEffect(() => {
     const stringifiedContacts = JSON.stringify(contacts);
